@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Crack | Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">BOOK CRACK</div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'products' %}">Products</a>
+            <a href="{% url 'cart' %}">Cart</a>
+            <a href="{% url 'checkout' %}">Checkout</a>
+        </div>
+        <div class="nav-icons">
+            <a href="{% url 'login' %}" style="text-decoration: none;">
+                <button class="auth-btn">Login</button>
+            </a>
+            <a href="{% url 'signup' %}" style="text-decoration: none;">
+                <button class="auth-btn">Sign Up</button>
+            </a>
+        </div>
+    </nav>
+
+   <main class="cart-wrapper" style="padding: 30px;">
+        <h1>Your Shopping Cart</h1>
+        
+        {% if cart %}
+            {% for title, item in cart.items %}
+                <div class="book-card" style="margin-bottom: 15px; padding: 15px; border: 1px solid #ddd; background: #fff;">
+                    <h2 style="font-size: 18px;">{{ title }}</h2>
+                    <p>Price: ₹{{ item.price }} × {{ item.quantity }} = <strong>₹</strong></p>
+                    <a href="{% url 'remove_from_cart' title %}" class="btn" style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none;">Remove</a>
+                </div>
+            {% endfor %}
+            <h3>Total: ₹{{ total }}</h3>
+            <a href="{% url 'checkout' %}" id="shop-now-container">
+                <button class="buy-now-btn" style="background-color: aqua; padding: 10px 20px; border: none; cursor: pointer;">Shop Now (Checkout)</button>
+            </a>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+        <a href="{% url 'products' %}" class="btn" style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none;">Continue Shopping</a>
+    </main>
+
+    <footer class="footer">
+        <p>✉️ contact@bookcrack.com | 📞 +91 98765 43210</p>
+        <p>© 2026 Book Crack. All Rights Reserved.</p>
+    </footer>
+
+    <!-- This script handles loading cart items and rendering the remove button automatically -->
+    <script src="{% static 'store/js/cart.js' %}"></script>
+</body>
+</html>

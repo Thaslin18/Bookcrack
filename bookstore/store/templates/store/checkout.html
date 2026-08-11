@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <style>
+        body{ 
+            background-color: #f4f4f9; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    background-color: var(--dark, #2d2424);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;
+}
+.checkout-box, .confirm-box{ 
+    background: white; 
+    padding: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    width: 350px; 
+    text-align: center; 
+}
+h1{ 
+    margin-bottom: 20px; 
+    color: #333; 
+}
+input, select{ 
+    width: 100%; 
+    padding: 12px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+}
+.place-order-btn, .continue-btn{ 
+    width: 100%; 
+    padding: 12px; 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-top: 15px;
+}
+
+.place-order-btn:hover{ 
+    background: #218838; 
+}
+.confirm-box i{ 
+    margin-bottom: 20px; 
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+     <a href="{% url 'products' %}" class="back-btn">← Back</a>
+    <div id="checkout-form" class="checkout-box">
+        <h1>Checkout</h1>
+        <label>Payment Method:</label>
+        <select>
+            <option>Credit/Debit Card</option>
+            <option>UPI</option>
+        </select>
+        <input type="text" placeholder="Card/UPI Number">
+        <input type="password" placeholder="Password/PIN">
+        <button onclick="confirmOrder()" class="place-order-btn">Place Order</button>
+    </div>
+
+    <div id="confirmation-msg" class="confirm-box" style="display:none;">
+        <i class="fa-solid fa-circle-check" style="color: #28a745; font-size: 50px;"></i>
+        <h2>Order Confirmed!</h2>
+        <p>Your order will be delivered in two days!</p>
+        <p>Thank you for shopping with us!</p>
+        <a href="{% url 'products' %}" class="continue-btn" style="text-decoration: none;">Continue Shopping</a>
+    </div>
+    <script>
+        function confirmOrder() {
+            document.getElementById('checkout-form').style.display = 'none';
+            document.getElementById('confirmation-msg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

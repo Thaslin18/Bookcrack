@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-Book Checkout | BOOK CRACK</title>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+    background-color: var(--cream, #f9f7f2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    background-color: var(--dark, #2d2424);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.checkout-wrapper, .confirm-box {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e2ded5;
+    width: 450px;
+    box-sizing: border-box;
+}
+
+.checkout-wrapper h1, .confirm-box h2 {
+    text-align: center;
+    color: var(--dark, #2d2424);
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.book-row-item {
+    background: #faf8f5;
+    border: 1px dashed #c5a059;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.dropdown-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.select-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.select-group label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--dark, #2d2424);
+}
+
+.qty-dropdown, .text-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.85rem;
+    box-sizing: border-box;
+}
+
+.chapter-content {
+    text-align: center;
+    padding: 10px;
+}
+
+.chapter-content img {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.chapter-content h3 {
+    color: var(--dark, #2d2424);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Style for the Add button aligned to the right corner */
+.add-book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-left: auto;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: background 0.2s ease;
+}
+
+.add-book-btn:hover {
+    background: #0056b3;
+}
+
+.payment-section {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+
+.payment-section label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--dark, #2d2424);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.place-order-btn, .continue-btn {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+    margin-top: 10px;
+}
+
+.place-order-btn:hover {
+    background: #218838;
+}
+
+.confirm-box {
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'products' %}" class="back-btn">← Back</a>
+
+    <div id="checkout-form" class="checkout-wrapper">
+        <h1>Select Reading Chapters & Payment</h1>
+
+        <div id="book-selection-container">
+            <div class="book-row-item">
+                <div class="dropdown-row">
+                    <div class="select-group">
+                        <label>Chapters</label>
+                        <select class="qty-dropdown chapter-select" onchange="updateBookPreview(this)">
+                            <option value="1">Chapter 1</option>
+                            <option value="2">Chapter 2</option>
+                            <option value="3">Chapter 3</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <label>Quantity</label>
+                        <select class="qty-dropdown">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="display-area">
+                    <div class="chapter-content active-preview">
+                        <img src="{% static 'store/images/kk1.jpg' %}" alt="Book Preview" class="preview-img">
+                        <h3 class="preview-title">Henry And Mudge - Chapter 1</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" onclick="addAnotherBook()" class="add-book-btn">
+            <i class="fa-solid fa-circle-plus"></i> Add
+        </button>
+
+        <div class="payment-section">
+            <label>Payment Method:</label>
+            <select class="qty-dropdown" style="margin-bottom: 10px;">
+                <option>Credit/Debit Card</option>
+                <option>UPI</option>
+                <option>Net Banking</option>
+            </select>
+            <input type="text" placeholder="Card/UPI Number" class="text-input">
+            <input type="password" placeholder="Password/PIN" class="text-input">
+        </div>
+
+        <button onclick="confirmOrder()" class="place-order-btn">Place Order for All Books</button>
+    </div>
+
+    <div id="confirmation-msg" class="confirm-box" style="display:none;">
+        <i class="fa-solid fa-circle-check" style="color: #28a745; font-size: 50px;"></i>
+        <h2>Your order is confirmed!</h2>
+        <p>Delivered within three days.</p>
+        <p>Thank you for shopping with us!</p>
+        <a href="{% url 'products' %}" class="continue-btn" style="text-decoration: none;">Continue Shopping</a>
+    </div>
+
+    <script>
+        const bookData = {
+            "1": { img: "{% static 'store/images/kk1.jpg' %}", title: "Henry And Mudge - Chapter 1" },
+            "2": { img: "{% static 'store/images/kk2.jpg' %}", title: "Henry And Mudge - Chapter 2" },
+            "3": { img: "{% static 'store/images/kk3.jpg' %}", title: "Henry And Mudge - Chapter 3" }
+        };
+
+        function updateBookPreview(selectElement) {
+            const val = selectElement.value;
+            const rowItem = selectElement.closest('.book-row-item');
+            const imgTag = rowItem.querySelector('.preview-img');
+            const titleTag = rowItem.querySelector('.preview-title');
+            
+            imgTag.src = bookData[val].img;
+            titleTag.textContent = bookData[val].title;
+        }
+
+        function addAnotherBook() {
+            const container = document.getElementById('book-selection-container');
+            const firstRow = container.querySelector('.book-row-item');
+            const clone = firstRow.cloneNode(true);
+            
+            // Reset values on clone
+            clone.querySelector('.chapter-select').value = "1";
+            updateBookPreview(clone.querySelector('.chapter-select'));
+            
+            container.appendChild(clone);
+        }
+
+        function confirmOrder() {
+            document.getElementById('checkout-form').style.display = 'none';
+            document.getElementById('confirmation-msg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

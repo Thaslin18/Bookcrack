@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Crack | Premium Bookstore</title>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BOOK CRACK</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="{% url 'login' %}" style="text-decoration: none;">
+            <button class="auth-btn">Login</button>
+            </a>
+            <a href="{% url 'signup' %}" style="text-decoration: none;">
+            <button class="auth-btn">Sign Up</button>
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-text">
+            <h1>Welcome to Book Crack</h1>
+             <div class="hero-intro">
+    <a href="{% url 'interest' %}" class="boost-btn">Boost your interest in books</a></div>
+            <p>Discover a world of endless reading possibilities! Explore thousands of bestselling novels, educational books, biographies, fantasy adventures, and timeless classics. Find your next favorite book today.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'products' %}" class="btn">Explore Collection</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'store/images/book 1 motive.jpg' %}" alt="Book Stack">
+        </div>
+    </header>
+
+    <section class="section">
+        <h2>Recently Updated</h2>
+        <div class="slider-container">
+            <div class="book-row">
+                <div class="card"><img src="{% static 'store/images/book 2 harry.jpg' %}" alt="Book"><h4>Harry Potter and the sorcerror'stone</h4><a href="{% url 'add_to_cart' 'Harry Potter and the sorcerer\'s stone' %}" class="btn">Add to Cart</a></div>
+                <div class="card"><img src="{% static 'store/images/book 3 adv.jpg' %}" alt="Book"><h4>Percy Jackson and the olympians</h4><a href="{% url 'add_to_cart' 'Percy Jackson and the olympians' %}" class="btn">Add to Cart</a></div>
+                <div class="card"><img src="{% static 'store/images/book 4 love.jpg' %}" alt="Book"><h4>Pride and the prejudice</h4><a href="{% url 'add_to_cart' 'Pride and prejudice' %}" class="btn">Add to Cart</a></div>
+                <div class="card"><img src="{% static 'store/images/book 5 rom thrill.jpg' %}" alt="Book"><h4>Shatter me</h4><a href="{% url 'add_to_cart' 'Shatter me' %}" class="btn">Add to Cart</a></div>
+            </div>  
+        </div>
+    </section>
+
+    <section class="discount-section">
+        <img src="{% static 'store/images/book 6 action.jpg' %}" alt="Featured Book">
+        <div class="offer-details">
+            <h2>Hurry up, limited time offers available!</h2>
+            <div class="timer">
+                <span>02 <br>Days</span> <span>14 <br>Hrs</span> <span>35 <br>Min</span> <span>20 <br>Sec</span>
+            </div>
+            <a href="{% url 'products' %}" class="btn">Claim Offer</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Shop by Categories</h2>
+        <div class="category-grid">
+            <div class="cat-card"><h3>Fiction</h3><img src="{% static 'store/images/fiction book 1.jpg' %}"><br></br>
+                <img src="{% static 'store/images/fiction book 2.jpg' %}"><br></br>
+                <img src="{% static 'store/images/fiction book 3.jpg' %}"><br></br>
+                <img src="{% static 'store/images/fiction book 4.jpg' %}"><br></br>
+                <a href="{% url 'fandetails' %}" class="btn">Shop Now</a></div>
+            <div class="cat-card"><h3>Educational</h3><img src="{% static 'store/images/edu book 1.jpg' %}"><br></br>
+                <img src="{% static 'store/images/edu book 2.jpg' %}"><br></br>
+                <img src="{% static 'store/images/edu book 3.jpg' %}"><br></br>
+                <img src="{% static 'store/images/edu book 4.jpg' %}"><br></br>
+                <a href="{% url 'edudetails' %}" class="btn">Shop Now</a></div>
+            <div class="cat-card"><h3>Children's</h3><img src="{% static 'store/images/chil book 1.jpg' %}"><br></br>
+                <img src="{% static 'store/images/chil book 2.jpg' %}"><br></br>
+                <img src="{% static 'store/images/chil book 3.jpg' %}"><br></br>
+                <img src="{% static 'store/images/chil book 4.jpg' %}"><br></br>
+                <a href="{% url 'kiddetails' %}" class="btn">Shop Now</a></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Customer Reviews</h2>
+       
+            <div class="review-row">
+                <div class="review-card"><i class="fas fa-quote-left"></i><p>"Amazing collection!"</p><span>★★★★★</span></div>
+                <div class="review-card"><i class="fas fa-quote-left"></i><p>"Fast delivery!"</p><span>★★★★★</span></div>
+                <div class="review-card"><i class="fas fa-quote-left"></i><p>"Highly recommend."</p><span>★★★★★</span></div>
+            </div>
+        </div>
+    </section>
+    <script>
+    function startCountdown() {
+        let endTime = localStorage.getItem('countdownEndTime');
+        if (!endTime || new Date().getTime() > endTime) {
+            endTime = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
+            localStorage.setItem('countdownEndTime', endTime);
+        }
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.querySelector('.timer').innerHTML = `
+                <span>${days} <br>Days</span> 
+                <span>${hours} <br>Hrs</span> 
+                <span>${minutes} <br>Min</span> 
+                <span>${seconds} <br>Sec</span> `;
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                localStorage.removeItem('countdownEndTime');
+                startCountdown();
+            }
+        }, 1000);
+    }
+
+    startCountdown();
+    const reviews = [
+        "\"The best bookstore! Fast delivery and high-quality books.\" - Customer A",
+        "\"Excellent selection and very helpful customer service.\" - Customer B",
+        "\"My go-to place for all my reading needs. Highly recommended!\" - Customer C"
+    ];
+    let index = 0;
+    function nextReview() {
+        index = (index + 1) % reviews.length;
+        document.getElementById('review-content').innerHTML = `<p>${reviews[index]}</p>`;
+    }
+    function prevReview() {
+        index = (index - 1 + reviews.length) % reviews.length;
+        document.getElementById('review-content').innerHTML = `<p>${reviews[index]}</p>`;
+    }
+</script>
+    <footer>
+        <p>📧 contact@bookcrack.com | 📞 +91 98765 43210</p>
+        <p>© 2026 Book Crack. All Rights Reserved.</p>
+    </footer>
+<script src="{% static 'store/js/cart.js' %}?v=2"></script>
+</body>
+</html>

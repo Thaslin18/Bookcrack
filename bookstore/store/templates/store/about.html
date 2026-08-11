@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - Book Crack</title>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">BOOK CRACK</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="{% url 'login' %}" style="text-decoration: none;">
+            <button class="auth-btn">Login</button>
+            </a>
+            <a href="{% url 'signup' %}" style="text-decoration: none;">
+            <button class="auth-btn">Sign Up</button>
+            </a>
+        </div>
+    </nav>
+    <main class="about-container">
+        <section class="about-content">
+            <div class="text-side">
+                <h2>About Book Crack</h2>
+                <p>We are the most trustable book store, committed to delivering quality literature to your doorstep. Our collection is curated by experts to ensure every reader finds exactly what they are looking for.</p>
+                <p>Our journey began with a simple passion for storytelling. We believe that books have the power to change perspectives, and we strive to make knowledge accessible to everyone.</p>
+                <p>We prioritize customer satisfaction above all else. Our team works tirelessly to maintain a seamless shopping experience, ensuring that your favorite stories arrive in perfect condition.</p>
+                <p>Join our community of book lovers today. Whether you are a student, a professional, or a casual reader, we are here to support your reading habit with great deals.</p>
+                <a href="{% url 'products' %}" class="btn">Shop Now</a>
+            </div>
+            <div class="image-side">
+                <img src="{% static 'store/images/asth book.jpg' %}" alt="About Book Crack">
+            </div>
+        </section>
+        <section class="reviews-section">
+            <h2 class="reviews-heading">Customer Reviews</h2>
+            <div class="review-carousel-row">
+            <button class="arrow left-arrow" onclick="changeReview(-1)">&#10094;</button>
+            <div class="review-display" id="review-text">
+                "The best bookstore! Fast delivery and high-quality books." - John Doe
+            </div>
+            <button class="arrow right-arrow" onclick="changeReview(1)">&#10095;</button>
+            </div>
+        </section>
+        <section class="features-container">
+            <div class="feature-item"><span>🚚</span><p>Free Delivery</p></div>
+            <div class="feature-item"><span>✅</span><p>Quality Guarantee</p></div>
+            <div class="feature-item"><span>🛡️</span><p>100% Secure Payment</p></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2026 Book Crack. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const reviews = [
+            '"The best bookstore! Fast delivery and high-quality books." - John Doe',
+            '"Excellent selection and very helpful customer service." - Jane Smith',
+            '"A wonderful experience every time I order. Highly recommended!" - Alex River'
+        ];
+        let currentIdx = 0;
+
+        function changeReview(direction) {
+            currentIdx = (currentIdx + direction + reviews.length) % reviews.length;
+            document.getElementById('review-text').innerText = reviews[currentIdx];
+        }
+    </script>
+</body>
+</html>

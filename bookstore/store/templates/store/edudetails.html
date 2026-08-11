@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <style>
+       .book-list-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    object-fit: cover; 
+    height: auto;
+}
+.image-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.book-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto; 
+}
+.back-btn {
+    position: fixed;   
+    top: 100px;       
+    left: 20px;        
+    padding: 10px 20px;
+    background-color: #a4680e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;     
+}
+
+.back-btn:hover {
+    background-color: #055461;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BOOK CRACK</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <a href="{% url 'login' %}" style="text-decoration: none;">
+            <button class="auth-btn">Login</button>
+            </a>
+            <a href="{% url 'signup' %}" style="text-decoration: none;">
+            <button class="auth-btn">Sign Up</button>
+            </a>
+        </div>
+    </nav>
+     <h2 style="text-align: center;">Education</h2>
+     <a href="{% url 'products' %}" class="back-btn">← Back</a>
+     <div class="book-grid-container">
+    <div class="book-list-item" >
+        <img src="{% static 'store/images/e1.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Giver Lois Lowry</h1>
+        <h3>Description</h3>
+        <p style="text-align: left;">A dystopian novel set in a seemingly perfect, 
+            emotionless society without pain, war, or choice. When twelve-year-old Jonas is assigned 
+            the role of "Receiver of Memory," he must absorb the community's forgotten past from his mentor. 
+            He soon discovers that this false utopia's peace is built on dark secrets, forcing him to make a 
+            dangerous choice to save someone he loves.</p>
+        <p><strong>Price: ₹480</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Giver Lois Lowry' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e2.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Power Of Your Subconscious Mind</h1>
+         <h3>Description</h3>
+        <p style="text-align: left;">A classic self-help book that teaches how your thoughts and beliefs shape your reality. 
+            By using practical techniques like visualization and positive affirmations, you can reprogram your subconscious to 
+            overcome fears, improve health, and achieve personal success.</p>
+        <p><strong>Price: ₹300</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Power Of Your Subconscious Mind' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e3.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Science Of Rapid Skill Acquisition</h1>
+         <h3>Description</h3>
+        <p style="text-align: left;">provides a practical, science-based blueprint to accelerate your learning. 
+            By distilling cognitive science and psychology, the book teaches you how to deconstruct complex subjects, 
+            optimize memory retention through techniques like spaced repetition, and master new talents efficiently.</p>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Science Of Rapid Skill Acquisition' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e4.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Critical Thinking</h1>
+        <p><strong>Price: ₹350</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Critical Thinking' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+    <div class="book-list-item">
+        <img src="{% static 'store/images/e5.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Memory</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Memory' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e6.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Critical Thinking:The skill you need</h1>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Critical Thinking:The skill you need' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e7.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Powerful Mindset Shifts</h1>
+        <p><strong>Price: ₹600</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Powerful Mindset Shifts' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e8.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Thinking in Algorithms</h1>
+        <p><strong>Price: ₹550</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Thinking in Algorithms' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e9.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Visual Intelligence</h1>
+        <p><strong>Price: ₹650</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Visual Intelligence' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e10.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>How To Analyze People</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'How To Analyze People' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+    <div class="book-list-item">
+        <img src="{% static 'store/images/e11.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Power Of Positive Thinking</h1>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Power Of Positive Thinking' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+    <div class="book-list-item">
+        <img src="{% static 'store/images/e12.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Art Of Self-Learning</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Art Of Self-Learning' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e13.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Ahead Of The Curve </h1>
+        <p><strong>Price: ₹650</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Ahead Of The Curve' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e14.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Getting To Yes</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Getting To Yes' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e15.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Origin Of Wealth</h1>
+        <p><strong>Price: ₹600</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Origin Of Wealth' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e16.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Neurology And Religion</h1>
+        <p><strong>Price: ₹750</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Neurology And Religion' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e17.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>I, Human</h1>
+        <p><strong>Price: ₹590</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'I, Human' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+     <div class="book-list-item">
+        <img src="{% static 'store/images/e18.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Lead With AI, Stay Human</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Lead With AI, Stay Human' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+
+    </div>
+    </div>
+</body>
+</html>

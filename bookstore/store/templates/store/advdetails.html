@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <style>
+       .book-list-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    object-fit: cover; 
+    height: auto;
+}
+.image-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.book-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto; 
+}
+.back-btn {
+    position: fixed;   
+    top: 100px;       
+    left: 20px;        
+    padding: 10px 20px;
+    background-color: #a4680e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;     
+}
+
+.back-btn:hover {
+    background-color: #055461;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BOOK CRACK</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'checkout' %}">Checkout</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <a href="{% url 'login' %}" style="text-decoration: none;">
+            <button class="auth-btn">Login</button>
+            </a>
+            <a href="{% url 'signup' %}" style="text-decoration: none;">
+            <button class="auth-btn">Sign Up</button>
+            </a>
+        </div>
+    </nav>
+     <h2 style="text-align: center;">Adventure</h2>
+     <a href="{% url 'products' %}" class="back-btn">← Back</a>
+     <div class="book-grid-container">
+    <div class="book-list-item" >
+        <img src="{% static 'store/images/ad0.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Ledger of Life</h1>
+        <h3>Description</h3>
+        <p style="text-align: left;">A vintage detective and occult mystery by J.U. Giesy and Junius B. Smith.
+             It follows detectives Glace and Bryce as they seek the help of 
+             Persian astrologer-sage Semi Dual to untangle a deadly blackmail ring 
+             and solve a murder.</p>
+        <p><strong>Price: ₹480</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkoutadv1' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Ledger of Life' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad1.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Adventure</h1>
+         <h3>Description</h3>
+        <p style="text-align: left;">The story follows a fever-stricken white plantation owner struggling against 
+            his indentured workers and cannibal attacks, whose survival and colonial views 
+            are upended by the arrival of Joan Lackland, a bold, independent,  
+            and liberated feminist woman</p>
+        <p><strong>Price: ₹300</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Adventure' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad2.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Maya Rivers Adventure</h1>
+         <h3>Description</h3>
+        <p style="text-align: left;">A mystery-adventure for readers aged 8–12.The story follows Maya and 
+            her friends as they discover an iron key that kicks off a dangerous treasure hunt across Thornebridge,  
+            forcing them to solve riddles and piece together a hidden map before rival searchers find it first.</p>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Maya Rivers Adventure' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/addd1.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The DreamKeeper Saga</h1>
+        <p><strong>Price: ₹350</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkoutadv2' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The DreamKeeper Saga' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+    <div class="book-list-item">
+        <img src="{% static 'store/images/ad4.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Door In Green</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Door In Green' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad5.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Girl Who Borrowed Dreams</h1>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Girl Who Borrowed Dreams' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad6.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Lucky One</h1>
+        <p><strong>Price: ₹600</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Lucky One' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad7.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Messenger</h1>
+        <p><strong>Price: ₹550</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Messenger' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad8.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Defenders Of Myth</h1>
+        <p><strong>Price: ₹650</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Defenders Of Myth' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/ad9.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Return Of The Knights</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Return Of The Knights' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+    <div class="book-list-item">
+        <img src="{% static 'store/images/adv10.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Treasure that behind in us</h1>
+        <p><strong>Price: ₹400</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Treasure that behind in us' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+    <div class="book-list-item">
+        <img src="{% static 'store/images/adv11.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>A Tale From Mithia</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'A Tale From Mithia' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv12.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Red Pyramid</h1>
+        <p><strong>Price: ₹650</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Red Pyramid' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv13.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>The Lost Princess</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'The Lost Princess' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv14.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Dungeon Adventures</h1>
+        <p><strong>Price: ₹600</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Dungeon Adventures' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv15.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Escape To A World Of Magic</h1>
+        <p><strong>Price: ₹750</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Escape To A World Of Magic' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv16.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Dragens Storm</h1>
+        <p><strong>Price: ₹590</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background:  rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Dragens Storm' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+
+     <div class="book-list-item">
+        <img src="{% static 'store/images/adv17.jpg' %}" alt="Book" style="width: 200px;">
+        <h1>Healer Land</h1>
+        <p><strong>Price: ₹450</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <br>
+        <a href="{% url 'checkout' %}" class="btn" style="background: rgb(5, 97, 85); padding: 10px 20px; text-decoration: none;">Buy Now</a>
+        <a href="{% url 'add_to_cart' 'Healer Land' %}" class="btn" style="background: #05514f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; display: inline-block;">Add to Cart</a>
+    </div>
+</div>
+<script src="{% static 'store/js/cart.js' %}?v=2"></script>
+</body>
+</html>
