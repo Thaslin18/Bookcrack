@@ -164,3 +164,20 @@ def scidetails(request):
     return render(request, 'store/scidetails.html')
 def signup(request):
     return render(request, 'store/signup.html')
+from django.shortcuts import render, redirect
+from .forms import AddressForm
+
+from django.shortcuts import render, redirect
+from .forms import AddressForm
+
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to home or another page after successful save
+            return redirect('home') 
+    else:
+        form = AddressForm()
+    
+    return render(request, 'store/add_address.html', {'form': form})

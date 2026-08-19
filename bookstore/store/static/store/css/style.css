@@ -428,6 +428,22 @@ footer{
     color: white; 
     margin-top: 50px; 
 }
+.add-location-btn {
+    background-color: #b59f78; 
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.add-location-btn:hover {
+    background-color: #9e8763; 
+    color: white;
+}
 @media (max-width: 768px) {
     .hero-section, .discount-section { 
         flex-direction: column; 

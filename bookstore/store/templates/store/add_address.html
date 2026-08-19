@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Shipping Address</title>
+</head>
+<body>
+    <div style="width: 400px; margin: 50px auto; font-family: Arial;">
+        <h2>Shipping Address Details</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%;">Save</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -22,7 +22,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('cart/', views.cart_view, name='cart'),  # Kept the session cart view
+    path('cart/', views.cart_view, name='cart'), 
     path('cart/add/<str:book_title>/', views.add_to_cart, name='add_to_cart'),
     path('cart/remove/<str:book_title>/', views.remove_from_cart, name='remove_from_cart'),  # <-- Added missing comma here
     path('about/', views.about, name='about'),
@@ -40,4 +40,5 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('scidetails/', views.scidetails, name='scidetails'),
     path('signup/', views.signup, name='signup'),
+    path('add-address/', views.add_address, name='add_address'),
 ]
