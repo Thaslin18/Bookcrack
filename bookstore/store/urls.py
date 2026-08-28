@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', views.cart_view, name='cart'), 
     path('cart/add/<str:book_title>/', views.add_to_cart, name='add_to_cart'),
-    path('cart/remove/<str:book_title>/', views.remove_from_cart, name='remove_from_cart'),  # <-- Added missing comma here
+    path('cart/remove/<str:book_title>/', views.remove_from_cart, name='remove_from_cart'),
     path('about/', views.about, name='about'),
     path('advdetails/', views.advdetails, name='advdetails'),
     path('checkout/', views.checkout, name='checkout'),

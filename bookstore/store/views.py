@@ -2,20 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book
 from .forms import AddressForm
 
-def add_to_cart(request, book_id):
-    # Retrieve the book from the database using its ID
-    book = get_object_or_404(Book, id=book_id)
+def add_to_cart(request, book_title):
+    # Retrieve the book from the database using its title
+    book = get_object_or_404(Book, title=book_title)
     
     if 'cart' not in request.session:
         request.session['cart'] = {}
     
     cart = request.session['cart']
-    book_id_str = str(book_id) # Session keys are stored as strings
     
-    if book_id_str in cart:
-        cart[book_id_str]['quantity'] += 1
+    if book_title in cart:
+        cart[book_title]['quantity'] += 1
     else:
-        cart[book_id_str] = {
+        cart[book_title] = {
             'title': book.title,
             'price': float(book.price),
             'quantity': 1,
@@ -31,11 +30,10 @@ def cart_view(request):
     context = {'cart': cart, 'total': total}
     return render(request, 'store/cart.html', context)
 
-def remove_from_cart(request, book_id):
+def remove_from_cart(request, book_title):
     cart = request.session.get('cart', {})
-    book_id_str = str(book_id)
-    if book_id_str in cart:
-        del cart[book_id_str]
+    if book_title in cart:
+        del cart[book_title]
         request.session.modified = True
     return redirect('cart')
 
@@ -82,7 +80,6 @@ def login(request):
     return render(request, 'store/login.html')
 
 def products(request):
-    # Fetch all books from the database to display them dynamically on your products page
     books = Book.objects.all()
     return render(request, 'store/products.html', {'books': books})
 
