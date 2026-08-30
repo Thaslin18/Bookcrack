@@ -32,70 +32,68 @@
 
     <a href="{% url 'home' %}" class="back-btn">← Back</a>
 
-    <div class="interest-page-container">
-        <h1 class="page-title">Why Read Books?</h1>
-        <p class="page-subtitle">Handpicked categories to ignite your passion for reading.</p>
+   <div class="interest-page-container">
+    <h1 class="page-title">Why Read Books?</h1>
+    <p class="page-subtitle">Handpicked categories to ignite your passion for reading.</p>
 
-        <div class="vertical-book-stack">
-            
-            <div class="vertical-book-card">
-                <img src="{% static 'store/images/ad0.jpg' %}" alt="Mystery Book">
-                <div class="book-info">
-                    <span class="category-tag">Mystery & Thriller</span>
-                    <h2>The Ledger of Life</h2>
-                    <p>A gripping vintage detective and occult mystery that plunges readers into a dark web of deception, secret societies, and unexpected twists that test the limits of human logic.</p>
-                     </div>
-        <a href="{% url 'advdetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
-    </div>
-
+    <div class="vertical-book-stack">
+        
+        <!-- Card 1 -->
+        <div class="vertical-book-card">
+            <img src="{% static 'store/images/ad0.jpg' %}" alt="Mystery Book">
+            <div class="book-info">
+                <span class="category-tag">Mystery & Thriller</span>
+                <h2>The Ledger of Life</h2>
+                <p>A gripping vintage detective and occult mystery that plunges readers into a dark web of deception, secret societies, and unexpected twists that test the limits of human logic.</p>
             </div>
-            <div class="vertical-book-card">
-                <img src="{% static 'store/images/ad1.jpg' %}" alt="Adventure Book">
-                <div class="book-info">
-                    <span class="category-tag">Survival Adventure</span>
-                    <h2>Wilderness Calling</h2>
-                    <p>An epic tale of survival against nature's harshest elements, where an isolated traveler discovers ancient ruins and faces moral dilemmas under the blazing wilderness sun.</p>
-                     </div>
-        <a href="{% url 'advdetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
-    </div>
+            <a href="{% url 'advdetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
+        </div>
 
+        <!-- Card 2 -->
+        <div class="vertical-book-card">
+            <img src="{% static 'store/images/ad1.jpg' %}" alt="Adventure Book">
+            <div class="book-info">
+                <span class="category-tag">Survival Adventure</span>
+                <h2>Wilderness Calling</h2>
+                <p>An epic tale of survival against nature's harshest elements, where an isolated traveler discovers ancient ruins and faces moral dilemmas under the blazing wilderness sun.</p>
             </div>
-            <div class="vertical-book-card">
-                <img src="{% static 'store/images/e2.jpg' %}" alt="Education Book">
-                <div class="book-info">
-                    <span class="category-tag">Science & Education</span>
-                    <h2>Power Of Your Subconcious Mind</h2>
-                    <p> how your thoughts and beliefs shape your reality. 
-            By using practical techniques like visualization and positive affirmations, you can reprogram your subconscious to 
-            overcome fears, improve health, and achieve personal success.</p>
-             </div>
-        <a href="{% url 'edudetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
-    </div>
+            <a href="{% url 'advdetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
+        </div>
 
+        <!-- Card 3 -->
+        <div class="vertical-book-card">
+            <img src="{% static 'store/images/e2.jpg' %}" alt="Education Book">
+            <div class="book-info">
+                <span class="category-tag">Science & Education</span>
+                <h2>Power Of Your Subconcious Mind</h2>
+                <p>How your thoughts and beliefs shape your reality. By using practical techniques like visualization and positive affirmations, you can reprogram your subconscious to overcome fears, improve health, and achieve personal success.</p>
             </div>
-            <div class="vertical-book-card">
-                <img src="{% static 'store/images/k2.jpg' %}" alt="Kids Book">
-                <div class="book-info">
-                    <span class="category-tag">Kids like</span>
-                    <h2>Starry Journey</h2>
-                    <p> Starry's Journey (by Courtney Stasko), you and your child will embark on a deeply emotional exploration of 
-                        love, loss, and healing. Born from the author's own experience with grief, the book follows a young girl's tender 
-                        quest to find her daddy's light among the stars.</p>
-             </div>
-        <a href="{% url 'kiddetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
-    </div>
+            <a href="{% url 'edudetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
+        </div>
 
+        <!-- Card 4 -->
+        <div class="vertical-book-card">
+            <img src="{% static 'store/images/k2.jpg' %}" alt="Kids Book">
+            <div class="book-info">
+                <span class="category-tag">Kids like</span>
+                <h2>Starry Journey</h2>
+                <p>Starry's Journey (by Courtney Stasko), you and your child will embark on a deeply emotional exploration of love, loss, and healing. Born from the author's own experience with grief, the book follows a young girl's tender quest to find her daddy's light among the stars.</p>
             </div>
-            <div class="vertical-book-card">
-                <img src="{% static 'store/images/f6.jpg' %}" alt="Fantasy Book">
-                <div class="book-info">
-                    <span class="category-tag">Fantasy World</span>
-                    <h2>The Town That Keeps You</h2>
-                    <p> The setting becomes a character itself. You’ll feel a strong sense of isolation, as though the town is 
-                        physically and magically barricading you from the outside world.</p>
-             </div>
-        <a href="{% url 'fandetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
-    </div>
+            <a href="{% url 'kiddetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
+        </div>
 
+        <!-- Card 5 -->
+        <div class="vertical-book-card">
+            <img src="{% static 'store/images/f6.jpg' %}" alt="Fantasy Book">
+            <div class="book-info">
+                <span class="category-tag">Fantasy World</span>
+                <h2>The Town That Keeps You</h2>
+                <p>The setting becomes a character itself. You’ll feel a strong sense of isolation, as though the town is physically and magically barricading you from the outside world.</p>
+            </div>
+            <a href="{% url 'fandetails' %}" class="btn" style="text-decoration: none;">Got this book</a>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
