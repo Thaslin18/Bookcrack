@@ -21,6 +21,7 @@ def cart(request):
     user_id = request.user.id if request.user.is_authenticated else 1
     
     with connection.cursor() as cursor:
+        # Fetch cart items joined with books table to get the price
         cursor.execute("""
             SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
             FROM cart_items ci
