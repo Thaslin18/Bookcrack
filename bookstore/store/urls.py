@@ -22,7 +22,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('cart/', views.cart_view, name='cart'), 
+    path('cart/', views.cart, name='cart'), 
     path('cart/add/<str:book_title>/', views.add_to_cart, name='add_to_cart'),
     path('cart/remove/<str:book_title>/', views.remove_from_cart, name='remove_from_cart'),
     path('about/', views.about, name='about'),
