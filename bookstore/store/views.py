@@ -1,40 +1,52 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import connection
 from .models import Book
 from .forms import AddressForm
 
 def add_to_cart(request, book_title):
-    # Retrieve the book from the database using its title
-    book = get_object_or_404(Book, title=book_title)
-    
-    if 'cart' not in request.session:
-        request.session['cart'] = {}
-    
-    cart = request.session['cart']
-    
-    if book_title in cart:
-        cart[book_title]['quantity'] += 1
-    else:
-        cart[book_title] = {
-            'title': book.title,
-            'price': float(book.price),
-            'quantity': 1,
-            'image': book.image.url if book.image else ''
-        }
-            
-    request.session.modified = True
+    # Fallback to user_id = 1 if the user isn't logged in
+    user_id = request.user.id if request.user.is_authenticated else 1  
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            INSERT INTO cart_items (user_id, book_title, quantity)
+            VALUES (%s, %s, 1)
+            ON CONFLICT (user_id, book_title)
+            DO UPDATE SET quantity = cart_items.quantity + 1;
+        """, [user_id, book_title])
+        
     return redirect('cart')
 
-def cart_view(request):
-    cart = request.session.get('cart', {})
-    total = sum(item['price'] * item['quantity'] for item in cart.values())
-    context = {'cart': cart, 'total': total}
+def cart(request):
+    user_id = request.user.id if request.user.is_authenticated else 1
+    
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
+            FROM cart_items ci
+            LEFT JOIN store_book b ON b.title = ci.book_title
+            WHERE ci.user_id = %s;
+        """, [user_id])
+        
+        columns = [col[0] for col in cursor.description]
+        cart_items = [
+            dict(zip(columns, row))
+            for row in cursor.fetchall()
+        ]
+        
+    total = sum(item['price'] * item['quantity'] for item in cart_items)
+    context = {'cart': cart_items, 'total': total}
     return render(request, 'store/cart.html', context)
 
 def remove_from_cart(request, book_title):
-    cart = request.session.get('cart', {})
-    if book_title in cart:
-        del cart[book_title]
-        request.session.modified = True
+    user_id = request.user.id if request.user.is_authenticated else 1
+    
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            DELETE FROM cart_items 
+            WHERE user_id = %s AND book_title = %s;
+        """, [user_id, book_title])
+        
     return redirect('cart')
 
 def home(request):
@@ -45,9 +57,6 @@ def about(request):
 
 def advdetails(request):
     return render(request, 'store/advdetails.html')
-
-def cart(request):
-    return render(request, 'store/cart.html')
 
 def checkout(request):
     return render(request, 'store/checkout.html')

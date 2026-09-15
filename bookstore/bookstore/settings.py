@@ -75,10 +75,9 @@ WSGI_APPLICATION = 'bookstore.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default='postgresql://neondb_owner:npg_UCOM1qN6oLuc@ep-wandering-violet-b3meulf5.c-4.ap-southeast-1.aws.neon.tech/neondb?sslmode=require',
         conn_max_age=600,
         ssl_require=True
     )
