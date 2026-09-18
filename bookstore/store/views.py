@@ -10,7 +10,7 @@ def add_to_cart(request, book_title):
     with connection.cursor() as cursor:
         cursor.execute("""
             INSERT INTO cart_items (user_id, book_title, quantity)
-            VALUES (%s, %s, 1)
+            VALUES (%s, TRIM(%s), 1)
             ON CONFLICT (user_id, book_title)
             DO UPDATE SET quantity = cart_items.quantity + 1;
         """, [user_id, book_title])
@@ -46,9 +46,10 @@ def remove_from_cart(request, book_title):
     user_id = request.user.id if request.user.is_authenticated else 1
     
     with connection.cursor() as cursor:
+        # Using LOWER and TRIM here as well so it successfully catches and deletes the item
         cursor.execute("""
             DELETE FROM cart_items 
-            WHERE user_id = %s AND book_title = %s;
+            WHERE user_id = %s AND LOWER(TRIM(book_title)) = LOWER(TRIM(%s));
         """, [user_id, book_title])
         
     return redirect('cart')
