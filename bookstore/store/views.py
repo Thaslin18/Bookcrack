@@ -5,14 +5,15 @@ from .forms import AddressForm
 
 def add_to_cart(request, book_title):
     user_id = request.user.id if request.user.is_authenticated else 1  
+    clean_title = book_title.strip()
 
     with connection.cursor() as cursor:
         cursor.execute("""
             INSERT INTO cart_items (user_id, book_title, quantity)
-            VALUES (%s, TRIM(%s), 1)
+            VALUES (%s, %s, 1)
             ON CONFLICT (user_id, book_title)
             DO UPDATE SET quantity = cart_items.quantity + 1;
-        """, [user_id, book_title])
+        """, [user_id, clean_title])
         
     return redirect('cart')
 
@@ -30,6 +31,7 @@ def cart(request):
         
     for row in rows:
         title, quantity = row
+        # Safely query the Book model using case-insensitive matching
         book = Book.objects.filter(title__iexact=title.strip()).first()
         price = float(book.price) if (book and book.price) else 0.0
         
@@ -46,12 +48,13 @@ def cart(request):
 
 def remove_from_cart(request, book_title):
     user_id = request.user.id if request.user.is_authenticated else 1
+    clean_title = book_title.strip()
     
     with connection.cursor() as cursor:
         cursor.execute("""
             DELETE FROM cart_items 
             WHERE user_id = %s AND LOWER(TRIM(book_title)) = LOWER(TRIM(%s));
-        """, [user_id, book_title])
+        """, [user_id, clean_title])
         
     return redirect('cart')
 
