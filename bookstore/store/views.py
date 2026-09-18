@@ -22,21 +22,24 @@ def cart(request):
     
     cart_dict = {}
     with connection.cursor() as cursor:
-        # Fetch cart items joined with books table using LOWER and TRIM for accurate pricing
+        # Fetch just the items from your manually created cart table
         cursor.execute("""
-            SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
-            FROM cart_items ci
-            LEFT JOIN store_book b ON LOWER(TRIM(b.title)) = LOWER(TRIM(ci.book_title))
-            WHERE ci.user_id = %s;
+            SELECT book_title, quantity 
+            FROM cart_items 
+            WHERE user_id = %s;
         """, [user_id])
-        
         rows = cursor.fetchall()
-        for row in rows:
-            title, quantity, price = row
-            cart_dict[title] = {
-                'price': float(price),
-                'quantity': quantity
-            }
+        
+    for row in rows:
+        title, quantity = row
+        # Use Django ORM to find the book safely, ignoring case/spacing issues
+        book = Book.objects.filter(title__iexact=title.strip()).first()
+        price = float(book.price) if (book and book.price) else 0.0
+        
+        cart_dict[title] = {
+            'price': price,
+            'quantity': quantity
+        }
         
     total = sum(item['price'] * item['quantity'] for item in cart_dict.values())
     context = {'cart': cart_dict, 'total': total}
@@ -46,7 +49,6 @@ def remove_from_cart(request, book_title):
     user_id = request.user.id if request.user.is_authenticated else 1
     
     with connection.cursor() as cursor:
-        # Using LOWER and TRIM here as well so it successfully catches and deletes the item
         cursor.execute("""
             DELETE FROM cart_items 
             WHERE user_id = %s AND LOWER(TRIM(book_title)) = LOWER(TRIM(%s));
