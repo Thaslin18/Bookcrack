@@ -22,11 +22,11 @@ def cart(request):
     
     cart_dict = {}
     with connection.cursor() as cursor:
-        # Fetch cart items joined with books table to get the price
+        # Using LOWER and TRIM to ensure robust matching
         cursor.execute("""
             SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
             FROM cart_items ci
-            LEFT JOIN store_book b ON b.title = ci.book_title
+            LEFT JOIN store_book b ON LOWER(TRIM(b.title)) = LOWER(TRIM(ci.book_title))
             WHERE ci.user_id = %s;
         """, [user_id])
         
