@@ -37,7 +37,7 @@
             {% for title, item in cart.items %}
                 <div class="book-card" style="margin-bottom: 15px; padding: 15px; border: 1px solid #ddd; background: #fff;">
                     <h2 style="font-size: 18px;">{{ title }}</h2>
-                    <p>Price: ₹{{ item.price }} × {{ item.quantity }} = <strong>₹</strong></p>
+                    <p>Price: ₹{{ item.price }} × {{ item.quantity }} = <strong>₹{{ item.total_price }}</strong></p>
                     <a href="{% url 'remove_from_cart' title %}" class="btn" style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none;">Remove</a>
                 </div>
             {% endfor %}
