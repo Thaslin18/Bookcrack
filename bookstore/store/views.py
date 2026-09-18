@@ -4,12 +4,8 @@ from .models import Book
 from .forms import AddressForm
 
 def add_to_cart(request, book_title):
-    # Force user_id to 1 temporarily for testing to avoid login state mismatches
-    user_id = 1  
-    
-    print(f"--- DEBUG ADD TO CART ---")
-    print(f"Book Title Received: {book_title}")
-    print(f"User ID Used: {user_id}")
+    # Fallback to user_id = 1 if the user isn't logged in
+    user_id = request.user.id if request.user.is_authenticated else 1  
 
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -22,9 +18,11 @@ def add_to_cart(request, book_title):
     return redirect('cart')
 
 def cart(request):
-    user_id = 1  # Match the same test user ID
+    user_id = request.user.id if request.user.is_authenticated else 1
     
+    cart_dict = {}
     with connection.cursor() as cursor:
+        # Fetch cart items joined with books table to get the price
         cursor.execute("""
             SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
             FROM cart_items ci
@@ -32,21 +30,20 @@ def cart(request):
             WHERE ci.user_id = %s;
         """, [user_id])
         
-        columns = [col[0] for col in cursor.description]
-        cart_items = [
-            dict(zip(columns, row))
-            for row in cursor.fetchall()
-        ]
+        rows = cursor.fetchall()
+        for row in rows:
+            title, quantity, price = row
+            cart_dict[title] = {
+                'price': float(price),
+                'quantity': quantity
+            }
         
-    print(f"--- DEBUG VIEW CART ---")
-    print(f"Items found in cart for user {user_id}: {cart_items}")
-        
-    total = sum(item['price'] * item['quantity'] for item in cart_items)
-    context = {'cart': cart_items, 'total': total}
+    total = sum(item['price'] * item['quantity'] for item in cart_dict.values())
+    context = {'cart': cart_dict, 'total': total}
     return render(request, 'store/cart.html', context)
 
 def remove_from_cart(request, book_title):
-    user_id = 1
+    user_id = request.user.id if request.user.is_authenticated else 1
     
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -55,6 +52,7 @@ def remove_from_cart(request, book_title):
         """, [user_id, book_title])
         
     return redirect('cart')
+
 def home(request):
     return render(request, 'store/index.html')
 
