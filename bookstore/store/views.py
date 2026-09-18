@@ -4,7 +4,6 @@ from .models import Book
 from .forms import AddressForm
 
 def add_to_cart(request, book_title):
-    # Fallback to user_id = 1 if the user isn't logged in
     user_id = request.user.id if request.user.is_authenticated else 1  
 
     with connection.cursor() as cursor:
@@ -22,7 +21,6 @@ def cart(request):
     
     cart_dict = {}
     with connection.cursor() as cursor:
-        # Fetch just the items from your manually created cart table
         cursor.execute("""
             SELECT book_title, quantity 
             FROM cart_items 
@@ -32,16 +30,17 @@ def cart(request):
         
     for row in rows:
         title, quantity = row
-        # Use Django ORM to find the book safely, ignoring case/spacing issues
         book = Book.objects.filter(title__iexact=title.strip()).first()
         price = float(book.price) if (book and book.price) else 0.0
         
         cart_dict[title] = {
+            'title': title,
             'price': price,
-            'quantity': quantity
+            'quantity': quantity,
+            'total_price': price * quantity
         }
         
-    total = sum(item['price'] * item['quantity'] for item in cart_dict.values())
+    total = sum(item['total_price'] for item in cart_dict.values())
     context = {'cart': cart_dict, 'total': total}
     return render(request, 'store/cart.html', context)
 
