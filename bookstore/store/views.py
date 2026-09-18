@@ -22,7 +22,7 @@ def cart(request):
     
     cart_dict = {}
     with connection.cursor() as cursor:
-        # Using LOWER and TRIM to ensure robust matching
+        # Fetch cart items joined with books table using LOWER and TRIM for accurate pricing
         cursor.execute("""
             SELECT ci.book_title, ci.quantity, COALESCE(b.price, 0) as price
             FROM cart_items ci
